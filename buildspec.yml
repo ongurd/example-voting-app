@@ -8,17 +8,16 @@ phases:
     commands:
     - echo Build started on `date`
     - echo Building the Docker images...
-    - CUSTOM_TAG=$(date +%s)
-    - docker build -t dockersamples/examplevotingapp_vote:$CUSTOM_TAG vote
-    - docker build -t dockersamples/examplevotingapp_worker:$CUSTOM_TAG worker
-    - docker build -t dockersamples/examplevotingapp_result:$CUSTOM_TAG result
-    - docker tag dockersamples/examplevotingapp_vote:$CUSTOM_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/examplevotingapp_vote:$CUSTOM_TAG
-    - docker tag dockersamples/examplevotingapp_worker:$CUSTOM_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/examplevotingapp_worker:$CUSTOM_TAG
-    - docker tag dockersamples/examplevotingapp_result:$CUSTOM_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/examplevotingapp_result:$CUSTOM_TAG
+    - docker build -t examplevotingapp_vote vote
+    - docker build -t examplevotingapp_worker worker
+    - docker build -t examplevotingapp_result result
+    - docker tag examplevotingapp_vote:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/examplevotingapp_vote:latest
+    - docker tag examplevotingapp_worker:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/examplevotingapp_worker:latest
+    - docker tag examplevotingapp_result:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/examplevotingapp_result:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/examplevotingapp_vote:$CUSTOM_TAG
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/examplevotingapp_worker:$CUSTOM_TAG
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/examplevotingapp_result:$CUSTOM_TAG
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/examplevotingapp_vote:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/examplevotingapp_worker:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/examplevotingapp_result:latest
