@@ -2,5 +2,7 @@ version: 0.2
 phases:
   build:
     commands:
+      - helm upgrade --install externaldns stable/external-dns --namespace externaldns --set rbac.create=true
       - kubectl apply -f k8s-specifications/namespace.yaml
       - kubectl apply -f k8s-specifications/
+      
