@@ -4,7 +4,7 @@ metadata:
   name: result
   namespace: vote
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: result.voting.kloia.com.
+    external-dns.alpha.kubernetes.io/hostname: result.kloia.net.
 spec:
   type: LoadBalancer
   ports:
